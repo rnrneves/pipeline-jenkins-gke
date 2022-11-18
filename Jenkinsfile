@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     dockerapp = docker.build("rnrneves/db-cli:${env.BUILD_ID}",
-                    '-f ./app-cli/database/Dockerfile .')
+                    '-f ./database/Dockerfile .')
 
                 }
                 
