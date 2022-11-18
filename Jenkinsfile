@@ -11,8 +11,8 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    dockerapp = docker.build("rnrneves/db-cli:${env.BUILD_ID}",
-                    '-f ./database/Dockerfile .')
+                    dockerapp = docker.build("rnrneves/app-cli:${env.BUILD_ID}",
+                    '-f ./Dockerfile .')
 
                 }
                 
@@ -42,8 +42,8 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'sed -i "s/{{tag}}/$tag_version/g" ./app-cli/database/Deployment-db.yaml'
-                    sh  'cat ./app-cli/database/Deployment-db.yaml'
+                    sh 'sed -i "s/{{tag}}/$tag_version/g" ./Deployment-app.yaml'
+                    sh  'cat ./Deployment-app.yaml'
                     kubernetesDeploy(configs: '**/app-cli/**', kubeconfigId: 'kubeconfig')
                 }
             }
